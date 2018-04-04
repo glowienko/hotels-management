@@ -44,3 +44,7 @@ gradle/wrapper
 application-localhost.yml
 out/
 bin/
+
+#others
+
+application-localhost.yml

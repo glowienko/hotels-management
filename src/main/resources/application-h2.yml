@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active:
+      - dev
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: update
+      generate-ddl: true
+      show-sql: false
+  datasource:
+    jmx-enabled: true
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    username: sa #- or test test as you wish
+    driver-class-name: org.h2.Driver
+    password: null
+  h2:
+    console:
+      enabled: true

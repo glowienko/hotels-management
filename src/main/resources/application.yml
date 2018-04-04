@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Hotels server
+  liquibase:
+      change-log: classpath:database/db-changelog.xml
+  profiles:
+    active:
+      - mysql
+      - localhost
+#      - h2
+
+logging:
+  level:
+    org.springframework: INFO
+
+server:
+  port: 9095
+
+
+
