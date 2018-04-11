@@ -15,7 +15,7 @@ enum CategoryName {
         if(StringUtils.isEmpty(category)) {
             throw new IllegalArgumentException("Cannot create category from: " + category);
         }
-
+        //FIXME: check this and fix if needed
         return CategoryName.valueOf(category);
     }
 }
