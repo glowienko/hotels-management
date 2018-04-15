@@ -2,6 +2,7 @@ package com.studia.bd2.hotels.management.server.database.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -34,7 +35,7 @@ public class Hotel {
             joinColumns = {@JoinColumn(name = "hotel_id")},
             inverseJoinColumns = {@JoinColumn(name = "discount_id")}
     )
-    private Set<Discount> discounts;
+    private List<Discount> discounts;
 
 
 }

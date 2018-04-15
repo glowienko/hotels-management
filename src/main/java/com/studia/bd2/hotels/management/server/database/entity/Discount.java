@@ -23,4 +23,10 @@ public class Discount {
 
     @ManyToMany(mappedBy = "discounts")
     private Set<Hotel> hotels;
+
+    @ManyToMany(mappedBy = "discounts")
+    private Set<Room> rooms;
+
+    @ManyToMany(mappedBy = "discounts")
+    private Set<Building> buildings;
 }

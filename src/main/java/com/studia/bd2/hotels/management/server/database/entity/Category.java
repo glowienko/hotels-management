@@ -18,4 +18,7 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private Set<Hotel> hotels;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Building> buildings;
 }
