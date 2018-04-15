@@ -31,4 +31,13 @@ public class Room {
 
     @ManyToMany(mappedBy = "rooms")
     List<Reservation> reservations;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "rooms_prices",
+            joinColumns = {@JoinColumn(name = "room_id")},
+            inverseJoinColumns = {@JoinColumn(name = "price_id"
+            )}
+    )
+    private List<Price> prices;
 }
