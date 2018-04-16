@@ -1,1 +1,1 @@
-# Hotels management server
+# Hotels management project
