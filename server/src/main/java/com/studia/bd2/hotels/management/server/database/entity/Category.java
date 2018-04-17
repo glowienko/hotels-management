@@ -10,10 +10,11 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = AUTO)
+    @Column(name = "id")
     private Long id;
 
-
     @Enumerated(EnumType.STRING)
+    @Column(name = "name")
     private CategoryName name;
 
     @OneToMany(mappedBy = "category")

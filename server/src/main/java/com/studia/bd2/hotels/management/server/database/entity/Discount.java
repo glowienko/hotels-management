@@ -11,6 +11,7 @@ public class Discount {
 
     @Id
     @GeneratedValue(strategy = AUTO)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "start_date")
@@ -19,6 +20,7 @@ public class Discount {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
+    @Column(name = "percentage")
     private int percentage;
 
     @ManyToMany(mappedBy = "discounts")

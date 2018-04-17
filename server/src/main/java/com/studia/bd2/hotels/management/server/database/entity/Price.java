@@ -1,10 +1,8 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -14,6 +12,15 @@ public class Price {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
+    @Column(name = "start_date")
+    private LocalDateTime startDate;
+
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
+
+    @Column(name = "value", precision = 6, scale = 2)
+    private BigDecimal value;
 
     @ManyToMany(mappedBy = "prices")
     private List<Room> rooms;

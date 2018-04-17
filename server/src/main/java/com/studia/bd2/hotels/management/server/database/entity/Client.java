@@ -1,18 +1,16 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity(name = "clients")
-public class HotelClient {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    @Column(name = "client_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "first_name")
@@ -27,6 +25,9 @@ public class HotelClient {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "is_conference")
+    @Column(name = "conference")
     private Boolean conference;
+
+    @OneToMany(mappedBy = "client")
+    private Set<ClientField> clientFields;
 }

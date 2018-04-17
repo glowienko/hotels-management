@@ -2,6 +2,7 @@ package com.studia.bd2.hotels.management.server.database.entity;
 
 import javax.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,14 +21,15 @@ public class Reservation {
     @Column(name = "check_out_date")
     private LocalDateTime checkOutDate;
 
-    private Long cost;
+    @Column(name = "cost", precision = 10, scale = 2)
+    private BigDecimal cost;
 
     @Enumerated(EnumType.STRING)
     private ReservationState state;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false)
-    private HotelClient client;
+    private Client client;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
