@@ -1,5 +1,6 @@
 package com.studia.bd2.hotels.management.server.web.rest.controller;
 
+import com.studia.bd2.hotels.management.server.database.entity.Hotel;
 import com.studia.bd2.hotels.management.server.database.repository.HotelRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ public class HotelsController {
     //TODO: remove this later
     @GetMapping
     public String test() {
-//        hotelRepository.save(new Hotel("testHotel2"));
-        return "HUEHU";
+        Hotel hotel = new Hotel();
+        hotel.setName("Star Beach");
+        hotel.setStarsCount(5);
+        return hotel.toString();
     }
 }

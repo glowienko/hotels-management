@@ -1,6 +1,5 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import static java.util.Arrays.stream;

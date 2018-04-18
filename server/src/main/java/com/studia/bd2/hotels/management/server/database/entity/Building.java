@@ -1,18 +1,25 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
-import javax.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity(name = "buildings")
+@Getter @Setter
+@NoArgsConstructor
+@ToString @EqualsAndHashCode
 public class Building {
 
     @Id
     @GeneratedValue(strategy = AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @Column(name = "floors_count")
@@ -25,6 +32,9 @@ public class Building {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "building")
+    private Set<Room> rooms;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
