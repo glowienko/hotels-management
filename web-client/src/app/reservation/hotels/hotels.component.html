@@ -1,0 +1,152 @@
+<div>
+  <img class="w3-image" src="http://u.profitroom.pl/2017.zamek-gniew.pl/thumb/1200x630/uploads/baner.jpg"
+       alt="The Hotel" style="min-width:1000px" width="1500" height="800">
+  <div class="w3-display-left w3-padding w3-col 16 m8">
+  </div>
+</div>
+<div class="w3-content" style="max-width:1532px;">
+
+  <div class="w3-container w3-margin-top w3-red" id="rooms">
+    <h3>Our Hotels</h3>
+    <h6>You can find our hotels anywhere in the world:</h6>
+  </div>
+
+  <div *ngIf="!roomMode">
+
+  <div class="w3-row-padding">
+    <div class="w3-col m3">
+      <label>City:</label>
+      <input class="w3-input w3-border" placeholder="Warsaw">
+    </div>
+    <div class="w3-col m3">
+      <label><i class="fa fa-calendar-o"></i> Check In</label>
+      <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY">
+    </div>
+    <div class="w3-col m3">
+      <label><i class="fa fa-calendar-o"></i> Check Out</label>
+      <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY">
+    </div>
+  </div>
+  <div class="w3-row-padding">
+    <div class="w3-col m2">
+      <label><i class="fa fa-male"></i> Adults</label>
+      <input class="w3-input w3-border" type="number" placeholder="1">
+    </div>
+    <div class="w3-col m2">
+      <label><i class="fa fa-child"></i> Kids</label>
+      <input class="w3-input w3-border" type="number" placeholder="0">
+    </div>
+    <div class="w3-col m2">
+      <label>Search:</label>
+      <button class="w3-button w3-black w3-block" type="submit" (click)="roomMode = !roomMode">
+        <i class="fa fa-search"></i>
+        Search availability
+      </button>
+    </div>
+  </div>
+
+  <div class="w3-row-padding w3-padding-16 w3-text-white w3-text-strong w3-large">
+    <div class="w3-half w3-margin-bottom">
+      <div class="w3-display-container">
+        <img src="http://abexkielce.com.pl/wp-content/uploads/2017/12/wroclaw.jpg" alt="Wroclaw" style="width:100%">
+        <span class="w3-display-bottomright w3-padding">Wroclaw</span>
+      </div>
+    </div>
+    <div class="w3-half">
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="http://www.ft.lt/wp-content/uploads/2015/07/Var--uva1.jpg" alt="Warsaw" style="width:100%">
+            <span class="w3-display-bottomleft w3-padding">Warsaw</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="http://visitgdansk.com/en/download/2016-09/610.png" alt="Gdansk" style="width:100%">
+            <span class="w3-display-bottomright w3-padding">Gdansk</span>
+          </div>
+        </div>
+      </div>
+      <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img src="https://cdn.flixbus.de/2017-04/poznan-kultura-i-historia.jpg" alt="Poznan" style="width:100%">
+            <span class="w3-display-bottomright w3-padding">Poznan</span>
+          </div>
+        </div>
+        <div class="w3-half w3-margin-bottom">
+          <div class="w3-display-container">
+            <img
+              src="http://u.profitroom.pl/2017.stamary.pl/thumb/1200x630/uploads/zdjecia/hotel_stamary_zakopane0046.jpg"
+              alt="Zakopane" style="width:100%">
+            <span class="w3-display-bottomright w3-padding">Zakopane</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+  <div *ngIf="roomMode">
+
+    <div class="w3-row-padding">
+    <div class="w3-col m2">
+      <button class="w3-button w3-black w3-block" type="submit" (click)="roomMode = !roomMode">
+        <i class="fa fa-search"></i>
+        Select Hotel
+      </button>
+    </div>
+    </div>
+
+  <div class="w3-row-padding w3-padding-16">
+    <div class="w3-third w3-margin-bottom">
+      <img src="https://orig00.deviantart.net/86fc/f/2016/195/6/f/single_room_on_rent_by_rent2cash-da9y5f6.jpg" alt="Zakopane" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Single Room</h3>
+        <h6 class="w3-opacity">From 99 PLN</h6>
+        <p>Single bed</p>
+        <p>15m<sup>2</sup></p>
+        <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="selected = true">Choose Room</button>
+      </div>
+    </div>
+    <div class="w3-third w3-margin-bottom">
+      <img src="https://www.schloesslehotel.com/wp-content/uploads/2016/07/Classic-Double-1.jpg" alt="Zakopane" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Double Room</h3>
+        <h6 class="w3-opacity">From 169 PLN</h6>
+        <p>Queen-size bed</p>
+        <p>25m<sup>2</sup></p>
+        <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
+          class="fa fa-tv"></i></p>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="selected = true">Choose Room</button>
+      </div>
+    </div>
+    <div class="w3-third w3-margin-bottom">
+      <img src="https://www.mayfairhotel.com.au/images/deluxe-king-room.jpg" alt="Zakopane" style="width:100%">
+      <div class="w3-container w3-white">
+        <h3>Deluxe Room</h3>
+        <h6 class="w3-opacity">From 209 PLN</h6>
+        <p>King-size bed</p>
+        <p>40m<sup>2</sup></p>
+        <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
+          class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="selected = true">Choose Room</button>
+      </div>
+    </div>
+  </div>
+
+    <div class="w3-row-padding" *ngIf="selected">
+
+      <div class="w3-col m2">
+        <button class="w3-button w3-red w3-block w3-display-bottommiddle" type="submit" (click)="selectRoom()">
+          <i class="fa fa-search"></i>
+          Provide personal data
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
