@@ -1,5 +1,7 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 import java.math.BigDecimal;
@@ -9,6 +11,9 @@ import java.util.List;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity(name = "reservations")
+@Getter @Setter
+@NoArgsConstructor
+@ToString @EqualsAndHashCode
 public class Reservation {
 
     @Id

@@ -1,5 +1,7 @@
 package com.studia.bd2.hotels.management.server.database.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -7,6 +9,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity(name = "buildings")
+@Getter @Setter
+@NoArgsConstructor
+@ToString @EqualsAndHashCode
 public class Building {
 
     @Id
