@@ -1,13 +1,13 @@
-package com.studia.bd2.hotels.management.server.web.rest.controller;
+package com.studia.bd2.hotels.server.web.rest.controller;
 
-import com.studia.bd2.hotels.management.server.database.entity.Hotel;
-import com.studia.bd2.hotels.management.server.database.repository.HotelRepository;
+import com.studia.bd2.hotels.server.database.entity.Hotel;
+import com.studia.bd2.hotels.server.database.repository.HotelRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.studia.bd2.hotels.management.server.web.rest.ResourcePaths.API_PATH;
+import static com.studia.bd2.hotels.server.web.rest.ResourcePaths.API_PATH;
 
 @RestController
 @RequestMapping(API_PATH)

@@ -1,4 +1,4 @@
-package com.studia.bd2.hotels.management.server.database.entity;
+package com.studia.bd2.hotels.server.database.entity;
 
 import lombok.*;
 

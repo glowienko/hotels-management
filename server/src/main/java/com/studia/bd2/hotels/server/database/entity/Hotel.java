@@ -1,4 +1,4 @@
-package com.studia.bd2.hotels.management.server.database.entity;
+package com.studia.bd2.hotels.server.database.entity;
 
 import lombok.*;
 
@@ -12,6 +12,7 @@ import static javax.persistence.GenerationType.AUTO;
 @Getter @Setter
 @NoArgsConstructor
 @ToString @EqualsAndHashCode
+@Data
 public class Hotel {
 
     @Id

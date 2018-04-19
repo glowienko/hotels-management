@@ -1,4 +1,4 @@
-package com.studia.bd2.hotels.management.server;
+package com.studia.bd2.hotels.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.studia.bd2.hotels.management.server.web.rest;
+package com.studia.bd2.hotels.server.web.rest;
 
 public class ResourcePaths {
 
