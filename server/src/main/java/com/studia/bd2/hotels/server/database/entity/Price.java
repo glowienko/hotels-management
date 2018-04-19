@@ -9,10 +9,8 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity(name = "prices")
-@Getter @Setter
-@NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class Price {
     @Id
     @GeneratedValue(strategy = AUTO)

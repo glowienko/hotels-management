@@ -10,10 +10,8 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity(name = "reservations")
-@Getter @Setter
-@NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class Reservation {
 
     @Id

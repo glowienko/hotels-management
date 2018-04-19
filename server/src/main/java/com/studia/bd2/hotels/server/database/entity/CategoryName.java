@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 import static java.util.Arrays.stream;
 
-enum CategoryName {
+public enum CategoryName {
     FIRST,
     SECOND,
     THIRD;

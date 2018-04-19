@@ -6,10 +6,8 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity(name = "client_fields")
-@Getter @Setter
-@NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class ClientField {
 
     @Id

@@ -8,10 +8,8 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity(name = "buildings")
-@Getter @Setter
-@NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class Building {
 
     @Id

@@ -7,10 +7,8 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
 
+@Data
 @Entity(name = "rooms")
-@Getter @Setter
-@NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class Room {
 
     @Id
