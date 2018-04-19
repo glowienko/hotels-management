@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-hotels',
-  templateUrl: './hotels.component.html',
-  styleUrls: ['./hotels.component.css']
+  templateUrl: './hotel.component.html',
+  styleUrls: ['./hotel.component.css']
 })
 export class HotelsComponent implements OnInit {
   roomMode: boolean = false;

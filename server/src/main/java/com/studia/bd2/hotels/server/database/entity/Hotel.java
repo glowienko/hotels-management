@@ -9,6 +9,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.AUTO;
 
 @Data
+@NoArgsConstructor
 @Entity(name = "hotels")
 public class Hotel {
 

@@ -1,9 +1,8 @@
 package com.studia.bd2.hotels.server.database.entity;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -20,9 +19,9 @@ public class Category {
     @Column(name = "name")
     private CategoryName name;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Hotel> hotels;
+//    @OneToMany(mappedBy = "category")
+//    private Set<Hotel> hotels;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Building> buildings;
+//    @OneToMany(mappedBy = "category")
+//    private Set<Building> buildings;
 }
