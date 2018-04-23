@@ -18,10 +18,5 @@ public class Category {
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private CategoryName name;
-
-//    @OneToMany(mappedBy = "category")
-//    private Set<Hotel> hotels;
-
-//    @OneToMany(mappedBy = "category")
-//    private Set<Building> buildings;
+    
 }

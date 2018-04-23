@@ -1,16 +1,18 @@
 package com.studia.bd2.hotels.server.database.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
-@Data
-@NoArgsConstructor
 @Entity(name = "hotels")
+@NoArgsConstructor
+@Setter
+@Getter
 public class Hotel {
 
     @Id
@@ -31,8 +33,8 @@ public class Hotel {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "hotel")
-    private Set<Building> buildings;
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Building> buildings;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
