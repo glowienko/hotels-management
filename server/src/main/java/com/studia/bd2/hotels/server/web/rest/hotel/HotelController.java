@@ -3,6 +3,7 @@ package com.studia.bd2.hotels.server.web.rest.hotel;
 import com.studia.bd2.hotels.server.database.entity.Hotel;
 import com.studia.bd2.hotels.server.mapper.HotelMapper;
 import com.studia.bd2.hotels.server.service.HotelService;
+import com.studia.bd2.hotels.server.web.rest.hotel.dto.HotelDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
