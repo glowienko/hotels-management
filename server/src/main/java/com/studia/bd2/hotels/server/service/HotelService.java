@@ -20,10 +20,12 @@ public class HotelService {
     private final RoomRepository roomRepository;
 
 
+    @Transactional(readOnly = true)
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<Room> findRoomsByBuildingId(long buildingId) {
         return roomRepository.findByBuildingId(buildingId);
     }

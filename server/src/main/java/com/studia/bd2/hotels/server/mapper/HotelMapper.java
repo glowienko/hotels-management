@@ -34,12 +34,13 @@ public interface HotelMapper {
     Building toBuildingEntity(BuildingDto dto);
 
     CategoryDto toCategoryDto(Category category);
+
     Category toCategoryEntity(CategoryDto dto);
 
     @Mappings({
             @Mapping(target = "percentageHeight", source = "discount.percentage"),
     })
     DiscountDto toDiscountDto(Discount discount);
-    Discount toDiscountEntity(DiscountDto dto);
 
+    Discount toDiscountEntity(DiscountDto dto);
 }
