@@ -2,6 +2,7 @@ package com.studia.bd2.hotels.server.database.entity;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,6 @@ public class Client {
     @Column(name = "conference")
     private Boolean conference;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ClientField> clientFields;
 }
