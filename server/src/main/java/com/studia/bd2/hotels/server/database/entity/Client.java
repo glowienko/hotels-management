@@ -1,9 +1,13 @@
 package com.studia.bd2.hotels.server.database.entity;
 
-import lombok.*;
+import lombok.Data;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -32,5 +36,5 @@ public class Client {
     private Boolean conference;
 
     @OneToMany(mappedBy = "client")
-    private Set<ClientField> clientFields;
+    private List<ClientField> clientFields;
 }
