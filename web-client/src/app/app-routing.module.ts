@@ -10,10 +10,11 @@ import {ContactComponent} from "./contact/contact.component";
 const appRoutes: Routes = [
   {path: '', redirectTo:'/book', pathMatch: 'full'},
   {path: 'book', component: ReservationComponent, children:[
-      {path: '', component: SummaryComponent},
+      {path: '', component: HotelsComponent},
+      {path: 'summary', component: SummaryComponent},
       {path: 'hotels', component: HotelsComponent},
       {path: 'data', component: PersonalDataComponent},
-      {path: 'summary', component: SummaryComponent}
+
     ]},
   {path: 'manage', component: ManagementComponent},
   {path: 'contact', component: ContactComponent}

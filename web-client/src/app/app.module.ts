@@ -14,6 +14,11 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import { ContactComponent } from './contact/contact.component';
 import {DataTablesModule} from 'angular-datatables'
+import {HotelsService} from "./shared/Hotels.service";
+import {RoomsService} from "./shared/Rooms.service";
+import { HttpClientModule} from "@angular/common/http";
+import {ReservationService} from "./reservation/reservation.service";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,9 +36,10 @@ import {DataTablesModule} from 'angular-datatables'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HotelsService, RoomsService, ReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
