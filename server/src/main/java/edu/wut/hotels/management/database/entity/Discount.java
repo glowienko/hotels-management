@@ -10,7 +10,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "discounts")
-public class Discount {
+public class Discount implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

@@ -11,7 +11,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "prices")
-public class Price {
+public class Price implements Identifiable {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;

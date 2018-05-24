@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Building {
+public class Building implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

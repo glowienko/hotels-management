@@ -9,7 +9,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: none   #just for testing - destroy and create new db after server restart
+      ddl-auto: create   #just for testing - destroy and create new db after server restart
 
   datasource:
     url: jdbc:mysql://localhost:3306/hotelsdb?createDatabaseIfNotExist=true

@@ -6,9 +6,9 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.AUTO;
 
-@Data
+@Getter @Setter @EqualsAndHashCode
 @Entity(name = "client_fields")
-public class ClientField {
+public class ClientField implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -25,4 +25,14 @@ public class ClientField {
     @ManyToOne
     @JoinColumn(name="client_id", nullable=false)
     private Client client;
+
+    @Override
+    public String toString() {
+        return "ClientField{" +
+                "id=" + id +
+                ", type=" + type +
+                ", value='" + value + '\'' +
+                ", client=" + client.getId() +
+                '}';
+    }
 }

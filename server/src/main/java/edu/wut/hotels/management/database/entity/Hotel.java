@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Hotel {
+public class Hotel implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
