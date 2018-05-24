@@ -11,7 +11,6 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'scala'
 apply plugin: 'idea'
 //apply plugin: 'net.ltgt.apt'
 apply plugin: 'org.springframework.boot'
@@ -40,6 +39,4 @@ dependencies {
     compile 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 
     compile 'com.github.javafaker:javafaker:0.15'
-    compile 'org.scala-lang:scala-library:2.11.8'
-    testCompile 'org.scalatest:scalatest_2.11:3.0.0'
 }
