@@ -5,24 +5,49 @@
 
     <div *ngIf="!roomMode" class="w3-display-container w3-red">
       <div class="w3-container w3-red">
-        <h2><i class="fa fa-bed w3-margin-right"></i>Hotel Name</h2>
+        <h2><i class="fa fa-bed w3-margin-right"></i>Find your hotel</h2>
       </div>
       <div class="w3-container w3-white w3-padding-16">
         <div class="w3-row-padding">
-          <div class="w3-col m6">
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" class="w3-input w3-border" placeholder="Warsaw" [(ngModel)]="city">
+          <div class="w3-row-padding">
+            <div class="w3-col m6">
+              <label for="city">City:</label>
+              <input type="text" id="city" name="city" class="w3-input w3-border" placeholder="Warsaw"
+                     [(ngModel)]="city">
+            </div>
+            <div class="w3-col m3" style="padding-top: 22px">
+              <div class="w3-dropdown-hover" style="width: 100%">
+                <button class="w3-button w3-block w3-white w3-border w3-border-grey w3-display-bottom">{{stars}}<strong>*</strong>
+                  hotel
+                </button>
+                <div class="w3-dropdown-content w3-bar-block w3-border">
+                  <a class="w3-bar-item w3-button" (click)="setStars(1)">1</a>
+                  <a class="w3-bar-item w3-button" (click)="setStars(2)">2</a>
+                  <a class="w3-bar-item w3-button" (click)="setStars(3)">3</a>
+                  <a class="w3-bar-item w3-button" (click)="setStars(4)">4</a>
+                  <a class="w3-bar-item w3-button" (click)="setStars(5)">5</a>
+                </div>
+              </div>
+            </div>
+            <div class="w3-col m3">
+              <label for="city">Max price per day:</label>
+              <input type="number" id="price" name="city" class="w3-input w3-border" placeholder="1000"
+                     [(ngModel)]="maxPrice">
+            </div>
           </div>
+        </div>
 
+        <div class="w3-row-padding">
           <div class="w3-row-padding">
             <div class="w3-col m6">
               <label><i class="fa fa-calendar-o"></i> Check In</label>
-              <input id="checkInDate" class="w3-input w3-border" type="text" placeholder="DD MM YYYY"
+              <input id="checkInDate" class="w3-input w3-border" type="date" placeholder="DD MM YYYY"
                      [(ngModel)]="checkInDate">
             </div>
             <div class="w3-col m6">
               <label><i class="fa fa-calendar-o"></i> Check Out</label>
-              <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" [(ngModel)]="checkOutDate">
+              <input id="checkOutDate" class="w3-input w3-border" type="date" placeholder="DD MM YYYY"
+                     [(ngModel)]="checkOutDate">
             </div>
           </div>
         </div>
@@ -31,6 +56,7 @@
             <label>Search:</label>
             <button class="w3-button w3-black w3-block" type="submit" (click)="loadHotels()">
               <i class="fa fa-search"></i>
+              <!--<a href="#hotels">Search availability</a>-->
               Search availability
             </button>
           </div>
@@ -42,112 +68,93 @@
 
   </div>
 </div>
-<div class="w3-content" style="max-width:1532px;">
+<div id="content">
+  <section id="hotels">
+    <div class="w3-content" style="max-width:1532px;">
 
-  <div class="w3-container w3-margin-top w3-red" id="rooms">
-    <h3>Our Hotels</h3>
-    <h6>You can find our hotels anywhere in the world:</h6>
-  </div>
-
-  <div *ngIf="!roomMode">
-
-    <!--<div class="w3-row-padding">-->
-      <!--<div class="w3-col m3">-->
-        <!--<label for="city">City:</label>-->
-        <!--<input type="text" id="city" name="city" class="w3-input w3-border" placeholder="Warsaw" [(ngModel)]="city">-->
-      <!--</div>-->
-      <!--<div class="w3-col m3">-->
-        <!--<label><i class="fa fa-calendar-o"></i> Check In</label>-->
-        <!--<input id="checkInDate" class="w3-input w3-border" type="text" placeholder="DD MM YYYY"-->
-               <!--[(ngModel)]="checkInDate">-->
-      <!--</div>-->
-      <!--<div class="w3-col m3">-->
-        <!--<label><i class="fa fa-calendar-o"></i> Check Out</label>-->
-        <!--<input class="w3-input w3-border" type="text" placeholder="DD MM YYYY" [(ngModel)]="checkOutDate">-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="w3-row-padding">-->
-      <!--<div class="w3-col m2">-->
-        <!--<label>Search:</label>-->
-        <!--<button class="w3-button w3-black w3-block" type="submit" (click)="loadHotels()">-->
-          <!--<i class="fa fa-search"></i>-->
-          <!--Search availability-->
-        <!--</button>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <div class="w3-row-padding w3-padding-16 w3-text-white w3-text-strong w3-large">
-      <div class="w3-half w3-margin-bottom" *ngFor="let hotel of hotels; let i = index">
-        <div class="w3-display-container" style="padding-top: 20px" *ngIf="i % 5 === 0">
-          <img src="http://abexkielce.com.pl/wp-content/uploads/2017/12/wroclaw.jpg" style="width:100%"
-               (click)="onHotelClick(hotel)">
-          <span class="w3-display-bottomright w3-padding">{{hotel.location}}</span>
-        </div>
+      <div class="w3-container w3-margin-top w3-red" id="rooms">
+        <h3>Our Hotels</h3>
+        <h6>You can find our hotels anywhere in the world:</h6>
       </div>
-      <div class="w3-half">
-        <div class="w3-half">
-          <div class="w3-row-padding" style="padding-bottom: 10px" *ngFor="let hotel of hotels; let i = index">
-            <div *ngIf="(i % 5 == 1) || (i % 5 == 3)">
-              <div class="w3-display-container">
-                <img src="{{hotel.imgPath}}" alt="Warsaw" style="width:100%"
-                     (click)="onHotelClick(hotel)">
-                <span class="w3-display-bottomleft w3-padding">{{hotel.location}}</span>
+
+      <div *ngIf="!roomMode">
+
+        <div class="w3-row-padding w3-padding-16 w3-text-white w3-text-strong w3-large">
+          <div class="w3-half w3-margin-bottom" *ngFor="let hotel of hotels; let i = index">
+            <div class="w3-display-container" style="padding-top: 20px" *ngIf="i % 5 === 0">
+              <img src="http://abexkielce.com.pl/wp-content/uploads/2017/12/wroclaw.jpg" style="width:100%"
+                   (click)="onHotelClick(hotel)">
+              <span class="w3-display-bottomright w3-padding">{{hotel.location}}</span>
+            </div>
+          </div>
+          <div class="w3-half">
+            <div class="w3-half">
+              <div class="w3-row-padding" style="padding-bottom: 10px" *ngFor="let hotel of hotels; let i = index">
+                <div *ngIf="(i % 5 == 1) || (i % 5 == 3)">
+                  <div class="w3-display-container">
+                    <img src="{{hotel.imgPath}}" alt="Warsaw" style="width:100%"
+                         (click)="onHotelClick(hotel)">
+                    <span class="w3-display-bottomleft w3-padding">{{hotel.location}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w3-half">
+              <div class="w3-row-padding" style="padding-bottom: 10px" *ngFor="let hotel of hotels; let i = index">
+                <div *ngIf="(i % 5 == 2) || (i % 5 == 4)">
+                  <div class="w3-display-container">
+                    <img src="{{hotel.imgPath}}" alt="Warsaw" style="width:100%"
+                         (click)="onHotelClick(hotel)">
+                    <span class="w3-display-bottomleft w3-padding">{{hotel.location}}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="w3-half">
-          <div class="w3-row-padding" style="padding-bottom: 10px" *ngFor="let hotel of hotels; let i = index">
-            <div *ngIf="(i % 5 == 2) || (i % 5 == 4)">
-              <div class="w3-display-container">
-                <img src="{{hotel.imgPath}}" alt="Warsaw" style="width:100%"
-                     (click)="onHotelClick(hotel)">
-                <span class="w3-display-bottomleft w3-padding">{{hotel.location}}</span>
-              </div>
+      </div>
+
+
+      <div *ngIf="roomMode">
+
+        <div class="w3-row-padding">
+          <div class="w3-col m2">
+            <button class="w3-button w3-black w3-block" type="submit" (click)="roomMode = !roomMode">
+              <i class="fa fa-search"></i>
+              Select Hotel
+            </button>
+          </div>
+        </div>
+
+        <div class="w3-row-padding w3-padding-16">
+          <div class="w3-third w3-margin-bottom" *ngFor="let room of rooms; let i = index">
+            <img src="{{room.imgPath}}" alt="{{room.premium}}" style="width:100%">
+            <div class="w3-container w3-white">
+              <h3>Capacity: {{room.capacity}}</h3>
+              <h6 class="w3-opacity">From {{room.prices[0].value}} PLN</h6>
+              <!--<p>Single bed</p>-->
+              <!--<p>15m<sup>2</sup></p>-->
+              <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
+              <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="onRoomClick(room)">Choose Room
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
+        <div class="w3-row-padding" *ngIf="selected">
 
-
-  <div *ngIf="roomMode">
-
-    <div class="w3-row-padding">
-      <div class="w3-col m2">
-        <button class="w3-button w3-black w3-block" type="submit" (click)="roomMode = !roomMode">
-          <i class="fa fa-search"></i>
-          Select Hotel
-        </button>
-      </div>
-    </div>
-
-    <div class="w3-row-padding w3-padding-16">
-      <div class="w3-third w3-margin-bottom" *ngFor="let room of rooms; let i = index">
-        <img src="{{room.imgPath}}" alt="{{room.premium}}" style="width:100%">
-        <div class="w3-container w3-white">
-          <h3>Capacity: {{room.capacity}}</h3>
-          <h6 class="w3-opacity">From {{room.prices[0].value}} PLN</h6>
-          <!--<p>Single bed</p>-->
-          <!--<p>15m<sup>2</sup></p>-->
-          <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-          <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="onRoomClick(room)">Choose Room</button>
+          <div class="w3-col m2">
+            <button class="w3-button w3-red w3-block w3-display-bottommiddle" type="submit"
+                    (click)="toPersonDataForm()">
+              <i class="fa fa-search"></i>
+              Provide personal data
+            </button>
+          </div>
         </div>
       </div>
+
     </div>
-
-    <div class="w3-row-padding" *ngIf="selected">
-
-      <div class="w3-col m2">
-        <button class="w3-button w3-red w3-block w3-display-bottommiddle" type="submit" (click)="toPersonDataForm()">
-          <i class="fa fa-search"></i>
-          Provide personal data
-        </button>
-      </div>
-    </div>
-  </div>
-
+  </section>
 </div>

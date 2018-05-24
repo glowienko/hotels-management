@@ -9,8 +9,8 @@ import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-hotels',
-  templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.css']
+  templateUrl: './hotels.component.html',
+  styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
   roomMode: boolean = false;
@@ -22,6 +22,8 @@ export class HotelsComponent implements OnInit {
   selectedRoom: RoomDto;
 
   city: string;
+  stars = 5;
+  maxPrice = 1000;
   checkInDate: Date;
   checkOutDate: Date;
 
@@ -43,17 +45,20 @@ export class HotelsComponent implements OnInit {
     this.hotels = HotelDto.getSampleData();
     let ok: boolean = true;
     if (this.city == undefined || this.city == '') {
-      ok = false
+      ok = false;
     }
     if (this.checkInDate == undefined) {
       ok = false;
     }
     if (this.checkOutDate == undefined) {
-      ok = false
+      ok = false;
+    }
+    if(this.stars == undefined){
+      ok = false;
     }
     /*
     if(ok){
-    this.hotelsService.getHotels(city, checkInDate, checkOutDate)
+    this.hotelsService.getHotels(city, checkInDate, checkOutDate, stars, maxPrice)
       .subscribe(
         (hotels: HotelDto[]) => {
           this.hotels = hotels;
@@ -91,6 +96,10 @@ export class HotelsComponent implements OnInit {
     this.reservationService.selectRoom(room);
 
     this.router.navigate(['/book/data']);
+  }
+
+  setStars(stars: number){
+    this.stars = stars;
   }
 
 }

@@ -7,8 +7,10 @@ export class HotelsService{
 
   constructor( private httpClient: HttpClient){}
 
-  getHotels(city: string, checkInDate: Date, checkOutDate: Date){
-    return this.httpClient.get<HotelDto[]>('app/path/hotels?city=' + city + '&checkInDate=' + checkInDate + '&checkOutDate=' + checkOutDate,
-      {observe: "body"});
+  getHotels(city: string, checkInDate: Date, checkOutDate: Date, stars: number, maxPrice: number){
+    return this.httpClient.get<HotelDto[]>('app/path/hotels?city=' + city
+      + '&checkInDate=' + checkInDate + '&checkOutDate=' + checkOutDate
+      + '&stars=' + stars + '&maxPrice=' + maxPrice,
+    {observe: "body"});
   }
 }

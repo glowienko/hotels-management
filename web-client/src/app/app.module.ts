@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ManagementComponent } from './management/management.component';
@@ -37,7 +36,8 @@ import {ReservationService} from "./reservation/reservation.service";
     AppRoutingModule,
     FormsModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [HotelsService, RoomsService, ReservationService],
   bootstrap: [AppComponent]
