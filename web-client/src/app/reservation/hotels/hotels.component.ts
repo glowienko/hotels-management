@@ -9,17 +9,16 @@ import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-hotels',
-  templateUrl: './hotel.component.html',
-  styleUrls: ['./hotel.component.css']
+  templateUrl: './hotels.component.html',
+  styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-  roomMode: boolean = false;
+  showHotels: boolean = false;
   selected: boolean = false;
 
   hotels: HotelDto[];
   selectedHotel: HotelDto;
   rooms: RoomDto[];
-  selectedRoom: RoomDto;
 
   city: string;
   checkInDate: Date;
@@ -31,41 +30,33 @@ export class HotelsComponent implements OnInit {
               private reservationService: ReservationService) {
   }
 
-  selectRoom() {
-
-  };
 
   ngOnInit() {
     console.log('hotels are alive');
   }
 
   loadHotels() {
-    this.hotels = HotelDto.getSampleData();
-    let ok: boolean = true;
-    if (this.city == undefined || this.city == '') {
-      ok = false
+    if (this.areHotelSearchDataValid()) {
+      this.hotelsService.getSimpleAllHotels()
+        .subscribe(
+          (hotels: HotelDto[]) => {
+            this.showHotels = true;
+            this.hotels = hotels;
+          }
+        );
     }
-    if (this.checkInDate == undefined) {
-      ok = false;
+    else {
+      alert("Fill empty fields!");
     }
-    if (this.checkOutDate == undefined) {
-      ok = false
-    }
-    /*
-    if(ok){
-    this.hotelsService.getHotels(city, checkInDate, checkOutDate)
-      .subscribe(
-        (hotels: HotelDto[]) => {
-          this.hotels = hotels;
-        }
-      );
-      }
-    */
+  }
+
+  private areHotelSearchDataValid() {
+    return this.city && this.checkInDate && this.checkOutDate;
   }
 
   onHotelClick(hotel: HotelDto) {
     this.selectedHotel = hotel;
-    this.roomMode = true;
+    this.showHotels = true;
     this.reservationService.selectHotel(this.selectedHotel);
     this.rooms = RoomDto.getSampleDate();
     /*
@@ -76,21 +67,5 @@ export class HotelsComponent implements OnInit {
       */
   }
 
-  onRoomClick(room: RoomDto) {
-    this.selectedRoom = room;
-    this.selectedRoom.reservations.push(
-      {
-        checkInDate: this.checkInDate,
-        checkOutDate: this.checkOutDate,
-        state: null,
-        id: null,
-        cost: null
-      }
-    );
-    this.selected = false;
-    this.reservationService.selectRoom(room);
-
-    this.router.navigate(['/book/data']);
-  }
 
 }

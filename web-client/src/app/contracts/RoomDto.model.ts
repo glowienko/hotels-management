@@ -2,7 +2,7 @@ import {DiscountDto} from "./DiscountDto.model";
 import {PriceDto} from "./PriceDto.model";
 import {RoomReservationDto} from "./RoomReservationDto.model";
 
-export class RoomDto{
+export class RoomDto {
   id: number;
   capacity: number;
   number: number;
@@ -14,10 +14,12 @@ export class RoomDto{
   prices: PriceDto[];
   discounts: DiscountDto[];
 
-  constructor(){}
 
-  static getSampleDate(){
-    let rooms : RoomDto[];
+  constructor() {
+  }
+
+  static getSampleDate() {
+    let rooms: RoomDto[];
     rooms = [];
 
     rooms.push(
@@ -28,8 +30,7 @@ export class RoomDto{
         floor: 4,
         premium: false,
         imgPath: 'https://www.corinthia.com/application/files/5214/7582/3494/business-room_02.jpg',
-        reservations: [
-        ],
+        reservations: [],
         discounts: [],
         prices: [{
           id: 0,
@@ -45,8 +46,7 @@ export class RoomDto{
         floor: 2,
         premium: true,
         imgPath: 'https://www.corinthia.com/application/files/5214/7582/3494/business-room_02.jpg',
-        reservations: [
-        ],
+        reservations: [],
         discounts: [],
         prices: [{
           id: 0,
