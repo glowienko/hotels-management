@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Hotel implements Identifiable {
+public class Hotel {
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -24,7 +24,10 @@ public class Hotel implements Identifiable {
     private String name;
 
     @Column(name = "location")
-    private String location; //probably it will be nice to create separate class for location infos
+    private String location;
+
+    @Column(name = "imgPath")
+    private String imgPath;
 
     @Column(name = "stars_count")
     private Integer starsCount;

@@ -9,6 +9,7 @@ public class HotelDto {
     private Long id;
     private String name;
     private String location;
+    private String imgPath;
     private Integer stars;
     private CategoryDto category;
     private Set<BuildingDto> buildings;

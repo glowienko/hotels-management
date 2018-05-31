@@ -13,6 +13,7 @@ public class RoomDto {
     private int number;
     private int capacity;
     private boolean premium;
+    private String imgPath;
 
     private List<RoomReservationDto> reservations;
     private List<PriceDto> prices;
