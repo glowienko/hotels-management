@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HotelDto} from "../../../../contracts/HotelDto.model";
 import {RoomDto} from "../../../../contracts/RoomDto.model";
+import {HotelDto} from "../../../../contracts/HotelDto.model";
+import {ReservationService} from "../../../reservation.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-room-list',
@@ -9,20 +11,19 @@ import {RoomDto} from "../../../../contracts/RoomDto.model";
 })
 export class RoomListComponent implements OnInit {
 
-
   @Input()
   public rooms: RoomDto[];
 
-  public selectedRoom: RoomDto;
-
-  constructor() {
+  constructor(private reservationService: ReservationService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  onRoomClick(room: RoomDto) {
-    this.selectedRoom = room;
+  selectRoom(room: RoomDto) {
+    this.reservationService.selectRoom(room);
+
+    this.router.navigate(['/book/data']);
     // this.selectedRoom.reservations.push(
     //   {
     //     checkInDate: this.checkInDate,
@@ -35,10 +36,6 @@ export class RoomListComponent implements OnInit {
     // this.selected = false;
     // this.reservationService.selectRoom(room);
 
-    // this.router.navigate(['/book/data']);
   }
-
-  selectRoom() {
-  };
 
 }

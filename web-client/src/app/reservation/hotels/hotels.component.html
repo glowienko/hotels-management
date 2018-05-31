@@ -5,7 +5,7 @@
 
     <div class="w3-display-container w3-red">
       <div class="w3-container w3-red">
-        <h2><i class="fa fa-bed w3-margin-right"></i>Find perfect hotel !</h2>
+        <h2><i class="fa fa-bed w3-margin-right"></i>Find your perfect hotel !</h2>
       </div>
       <div class="w3-container w3-white w3-padding-16">
         <div class="w3-row-padding">
@@ -29,6 +29,7 @@
         <div class="w3-row-padding">
           <div class="w3-col m4">
             <label>Search:</label>
+            <p class="alert" style="color:red;" *ngIf="!areSearchFieldsPresent;">Fill empty fileds !</p>
             <button class="w3-button w3-black w3-block" type="submit" (click)="loadHotels()">
               <i class="fa fa-search"></i>
               Search availability
@@ -43,8 +44,7 @@
   </div>
 </div>
 <div class="w3-content" style="max-width:1532px;">
-
-  <div *ngIf="showHotels">
+  <div *ngIf="showHotels && !showRooms">
     <div class="w3-container w3-margin-top w3-red" id="rooms">
       <h3>Our Hotels</h3>
       <h6>You can find our hotels anywhere in the world:</h6>
@@ -55,37 +55,28 @@
         <div class="w3-display-container" style="padding-top: 20px">
           <h2 style="color:black;">{{hotel.name}}</h2>
           <img src="{{hotel.imgPath}}" alt="{{hotel.name}}" style="width:50%; height:300px;"
-               (click)="onHotelClick(hotel)"/>
+               (click)="selectHotel(hotel)"/>
           <span class="w3-display-bottomright w3-padding">{{hotel.location}}</span>
         </div>
       </div>
     </div>
-
   </div>
 
 
-  <div *ngIf="showHotels">
+  <div>
+    <app-room-list *ngIf="showRooms" [rooms]=rooms></app-room-list>
 
-    <div class="w3-row-padding">
-      <div class="w3-col m2">
-        <button class="w3-button w3-black w3-block" type="submit" (click)="showHotels = !showHotels">
-          <i class="fa fa-search"></i>
-          Select Hotel
-        </button>
-      </div>
-    </div>
+    <!--<div class="w3-row-padding" *ngIf="selected">-->
 
-    <app-room-list *ngIf="showHotels" [rooms]="rooms"></app-room-list>
+    <!--<div class="w3-col m2">-->
+    <!--<button class="w3-button w3-red w3-block w3-display-bottommiddle" type="submit" (click)="toPersonDataForm()">-->
+    <!--<i class="fa fa-search"></i>-->
+    <!--Provide personal data-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
-    <div class="w3-row-padding" *ngIf="selected">
-
-      <div class="w3-col m2">
-        <button class="w3-button w3-red w3-block w3-display-bottommiddle" type="submit" (click)="toPersonDataForm()">
-          <i class="fa fa-search"></i>
-          Provide personal data
-        </button>
-      </div>
-    </div>
   </div>
 
 </div>

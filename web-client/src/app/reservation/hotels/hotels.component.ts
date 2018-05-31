@@ -5,7 +5,6 @@ import {HotelDto} from "../../contracts/HotelDto.model";
 import {RoomDto} from "../../contracts/RoomDto.model";
 import {RoomsService} from "../../shared/Rooms.service";
 import {ReservationService} from "../reservation.service";
-import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-hotels',
@@ -13,11 +12,12 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
+
   showHotels: boolean = false;
-  selected: boolean = false;
+  showRooms: boolean = false;
+  areSearchFieldsPresent: boolean = true;
 
   hotels: HotelDto[];
-  selectedHotel: HotelDto;
   rooms: RoomDto[];
 
   city: string;
@@ -32,11 +32,12 @@ export class HotelsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('hotels are alive');
   }
 
   loadHotels() {
+    this.showRooms = false;
     if (this.areHotelSearchDataValid()) {
+      this.areSearchFieldsPresent = true;
       this.hotelsService.getSimpleAllHotels()
         .subscribe(
           (hotels: HotelDto[]) => {
@@ -46,7 +47,7 @@ export class HotelsComponent implements OnInit {
         );
     }
     else {
-      alert("Fill empty fields!");
+      this.areSearchFieldsPresent = false;
     }
   }
 
@@ -54,11 +55,11 @@ export class HotelsComponent implements OnInit {
     return this.city && this.checkInDate && this.checkOutDate;
   }
 
-  onHotelClick(hotel: HotelDto) {
-    this.selectedHotel = hotel;
-    this.showHotels = true;
-    this.reservationService.selectHotel(this.selectedHotel);
+  selectHotel(hotel: HotelDto) {
     this.rooms = RoomDto.getSampleDate();
+    this.showRooms = true;
+
+    this.reservationService.selectHotel(hotel);
     /*
     this.roomService.getRooms(hotel.id).subscribe(
       (value: RoomDto[]) => {

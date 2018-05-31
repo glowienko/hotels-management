@@ -1,5 +1,5 @@
 export class ClientFieldDto {
-  type: number;
+  type: string;
   value: string;
 
   constructor(){}

@@ -19,7 +19,6 @@ import {RoomsService} from "./shared/Rooms.service";
 import { HttpClientModule} from "@angular/common/http";
 import {ReservationService} from "./reservation/reservation.service";
 import { RoomListComponent } from './reservation/hotels/room/room-list/room-list.component';
-import { SelectedRoomComponent } from './reservation/hotels/room/selected-room/selected-room.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +31,7 @@ import { SelectedRoomComponent } from './reservation/hotels/room/selected-room/s
     PersonalDataComponent,
     SummaryComponent,
     ContactComponent,
-    RoomListComponent,
-    SelectedRoomComponent,
-
+    RoomListComponent
   ],
   imports: [
     BrowserModule,
