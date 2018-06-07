@@ -13,8 +13,10 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-  roomMode: boolean = false;
-  selected: boolean = false;
+
+  showHotels: boolean = false;
+  showRooms: boolean = false;
+  areSearchFieldsPresent: boolean = true;
 
   hotels: HotelDto[];
   selectedHotel: HotelDto;
@@ -42,37 +44,31 @@ export class HotelsComponent implements OnInit {
   }
 
   loadHotels() {
-    this.hotels = HotelDto.getSampleData();
-    let ok: boolean = true;
-    if (this.city == undefined || this.city == '') {
-      ok = false;
+    this.showRooms = false;
+    if (this.areHotelSearchDataValid()) {
+      this.areSearchFieldsPresent = true;
+      this.hotelsService.getSimpleAllHotels()
+        .subscribe(
+          (hotels: HotelDto[]) => {
+            this.showHotels = true;
+            this.hotels = hotels;
+          }
+        );
     }
-    if (this.checkInDate == undefined) {
-      ok = false;
+    else {
+      this.areSearchFieldsPresent = false;
     }
-    if (this.checkOutDate == undefined) {
-      ok = false;
-    }
-    if(this.stars == undefined){
-      ok = false;
-    }
-    /*
-    if(ok){
-    this.hotelsService.getHotels(city, checkInDate, checkOutDate, stars, maxPrice)
-      .subscribe(
-        (hotels: HotelDto[]) => {
-          this.hotels = hotels;
-        }
-      );
-      }
-    */
   }
 
-  onHotelClick(hotel: HotelDto) {
-    this.selectedHotel = hotel;
-    this.roomMode = true;
-    this.reservationService.selectHotel(this.selectedHotel);
+  private areHotelSearchDataValid() {
+    return this.city && this.checkInDate && this.checkOutDate;
+  }
+
+  selectHotel(hotel: HotelDto) {
     this.rooms = RoomDto.getSampleDate();
+    this.showRooms = true;
+
+    this.reservationService.selectHotel(hotel);
     /*
     this.roomService.getRooms(hotel.id).subscribe(
       (value: RoomDto[]) => {
@@ -92,7 +88,7 @@ export class HotelsComponent implements OnInit {
         cost: null
       }
     );
-    this.selected = false;
+    // this.selected = false;
     this.reservationService.selectRoom(room);
 
     this.router.navigate(['/book/data']);

@@ -21,7 +21,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "reservations")
-public class Reservation {
+public class Reservation implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

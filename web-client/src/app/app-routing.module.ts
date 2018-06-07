@@ -8,14 +8,16 @@ import {ManagementComponent} from "./management/management.component";
 import {ContactComponent} from "./contact/contact.component";
 
 const appRoutes: Routes = [
-  {path: '', redirectTo:'/book', pathMatch: 'full'},
-  {path: 'book', component: ReservationComponent, children:[
+  {path: '', redirectTo: '/book', pathMatch: 'full'},
+  {
+    path: 'book', component: ReservationComponent, children: [
       {path: '', component: HotelsComponent},
       {path: 'summary', component: SummaryComponent},
       {path: 'hotels', component: HotelsComponent},
       {path: 'data', component: PersonalDataComponent},
 
-    ]},
+    ]
+  },
   {path: 'manage', component: ManagementComponent},
   {path: 'contact', component: ContactComponent}
 ];
@@ -24,6 +26,6 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule{
+export class AppRoutingModule {
 
 }

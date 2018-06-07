@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ReservationService} from "../reservation.service";
 import {RoomDto} from "../../contracts/RoomDto.model";
 import {ClientDto} from "../../contracts/ClientDto.model";
-import {Subscription} from "rxjs/Subscription";
 import {RoomsService} from "../../shared/Rooms.service";
-import {RoomReservationDto} from "../../contracts/RoomReservationDto.model";
 import {HotelDto} from "../../contracts/HotelDto.model";
 
 @Component({
@@ -31,18 +29,18 @@ export class SummaryComponent implements OnInit {
     this.selectedHotel = this.reservationService.getSelectedHotel();
     this.clientData = this.reservationService.getClientData();
 
-    if(this.selectedHotel == undefined) {
+    if (this.selectedHotel == undefined) {
       this.selectedHotel = new HotelDto();
       this.selectedHotel.buildings = [];
     }
 
-    if(this.selectedRoom == undefined) {
+    if (this.selectedRoom == undefined) {
       this.selectedRoom = new RoomDto();
       this.selectedRoom.reservations = [];
       this.selectedRoom.prices = [];
     }
 
-    if(this.clientData == undefined)
+    if (this.clientData == undefined)
       this.clientData = new ClientDto();
 
     this.reservationService.onRoomSelected
@@ -54,7 +52,7 @@ export class SummaryComponent implements OnInit {
 
     this.reservationService.clientDataProvided
       .subscribe(
-        (client: ClientDto) =>{
+        (client: ClientDto) => {
           this.clientData = client;
         }
       );
@@ -70,7 +68,7 @@ export class SummaryComponent implements OnInit {
   }
 
 
-  makeReservation(){
+  makeReservation() {
     // this.roomsService.bookRoom(this.selectedRoom);
   }
 

@@ -1,7 +1,8 @@
-import {Component, Injectable, Input, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {ClientDto} from "../../contracts/ClientDto.model";
 import {ReservationService} from "../reservation.service";
 import {Router} from "@angular/router";
+import {ClientService} from "./client.service";
 
 @Component({
   selector: 'app-personal-data',
@@ -10,21 +11,44 @@ import {Router} from "@angular/router";
 })
 @Injectable()
 export class PersonalDataComponent implements OnInit {
-    client: ClientDto;
+  client: ClientDto;
+  pesel: string;
+  address: string;
 
   constructor(private reservationService: ReservationService,
-              private router: Router) { }
+              private clientService: ClientService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     console.log('client is alive');
     this.client = new ClientDto();
   }
 
-  submitForm(){
-    console.log(this.client);
-    this.reservationService.dataProvided(this.client);
-    this.router.navigate(['/book/summary']);
+  submitForm() {
+    this.addPersonalDataToClient();
+
+    this.clientService.createOrUpdateClient(this.client).subscribe(
+      savedClient => {
+        this.client = savedClient;
+        this.reservationService.dataProvided(this.client);
+        this.router.navigate(['/book/summary']);
+      }
+    );
 
   }
 
+  private addPersonalDataToClient() {
+    this.client.clientFields.push(
+      {
+        type: 'PESEL',
+        value: this.pesel
+      });
+
+    this.client.clientFields.push(
+      {
+        type: 'ADDRESS',
+        value: this.address
+      });
+  }
 }

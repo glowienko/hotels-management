@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "categories")
-public class Category {
+public class Category implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)

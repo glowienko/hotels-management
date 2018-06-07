@@ -1,8 +1,16 @@
 package edu.wut.hotels.management.database.entity;
 
-import lombok.*;
+import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -28,8 +36,11 @@ public class Room {
     @Column(name = "premium")
     private boolean premium;
 
+    @Column(name = "imgPath")
+    private boolean imgPath;
+
     @ManyToOne
-    @JoinColumn(name="building_id", nullable=false)
+    @JoinColumn(name = "building_id", nullable = false)
     private Building building;
 
     @ManyToMany(mappedBy = "rooms")

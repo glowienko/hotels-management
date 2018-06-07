@@ -1,20 +1,17 @@
 package edu.wut.hotels.management.database.entity;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
 
-@Data
+@Getter @Setter @EqualsAndHashCode
 @Entity(name = "clients")
-public class Client {
+public class Client implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -38,4 +35,17 @@ public class Client {
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ClientField> clientFields;
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", conference=" + conference +
+                ", clientFields=" + Identifiable.extractIds(clientFields) +
+                '}';
+    }
 }
