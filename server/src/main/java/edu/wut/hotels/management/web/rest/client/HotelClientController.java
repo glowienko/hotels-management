@@ -21,7 +21,6 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequiredArgsConstructor
 public class HotelClientController {
 
-
     private final ClientMapper clientMapper;
     private final ClientService clientService;
 
