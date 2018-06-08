@@ -14,5 +14,5 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hotelsdb?createDatabaseIfNotExist=true
     username: root
-    password: janek2901
+    password: root
     driver-class-name: com.mysql.jdbc.Driver

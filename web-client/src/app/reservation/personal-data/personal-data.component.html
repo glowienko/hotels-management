@@ -7,28 +7,30 @@
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="first" type="text" placeholder="First Name" [ngModel]="client.firstName">
+          <input class="w3-input w3-border" name="first" type="text" placeholder="First Name"
+                 [(ngModel)]="client.firstName">
         </div>
       </div>
 
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="last" type="text" placeholder="Last Name" [ngModel]="client.lastName">
+          <input class="w3-input w3-border" name="last" type="text" placeholder="Last Name" [(ngModel)]="client.lastName">
         </div>
       </div>
 
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="email" type="text" placeholder="Email" [ngModel]="client.email">
+          <input class="w3-input w3-border" name="email" type="email" placeholder="E-mail" [(ngModel)]="client.email">
         </div>
       </div>
 
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="phone" type="text" placeholder="Phone" [ngModel]="client.phone">
+          <input class="w3-input w3-border" name="phone" type="tel" placeholder="Phone number"
+                 [(ngModel)]="client.phone">
         </div>
       </div>
 
@@ -42,26 +44,28 @@
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="isClientConference" type="checkbox" placeholder="Conference" [ngModel]="client.conference">
+          <input class="w3-input w3-border" name="pesel" type="text" placeholder="Pesel" [(ngModel)]="pesel">
         </div>
       </div>
 
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="pesel" type="text" placeholder="Pesel" [ngModel]="pesel" >
+          <input class="w3-input w3-border" name="address" type="text" placeholder="Address" [(ngModel)]="address">
         </div>
       </div>
 
       <div class="w3-row w3-section">
         <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
         <div class="w3-rest">
-          <input class="w3-input w3-border" name="address" type="text" placeholder="Address" [ngModel]="address">
+          Are you organising a conference?
+          <input name="isClientConference" type="checkbox" placeholder="Conference"
+                 [(ngModel)]="client.conference">
         </div>
       </div>
 
       <p class="w3-center">
-        <button class="w3-button w3-section w3-black w3-ripple" (click)="submitForm()"> Submit reservation </button>
+        <button class="w3-button w3-section w3-black w3-ripple" (click)="submitForm()">Next</button>
       </p>
     </form>
 

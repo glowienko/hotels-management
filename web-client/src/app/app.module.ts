@@ -18,6 +18,7 @@ import {RoomsService} from "./shared/Rooms.service";
 import { HttpClientModule} from "@angular/common/http";
 import {ReservationService} from "./reservation/reservation.service";
 import { RoomListComponent } from './reservation/hotels/room/room-list/room-list.component';
+import {ClientService} from "./reservation/personal-data/client.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { RoomListComponent } from './reservation/hotels/room/room-list/room-list
     HttpClientModule,
 
   ],
-  providers: [HotelsService, RoomsService, ReservationService],
+  providers: [HotelsService, RoomsService, ReservationService, ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

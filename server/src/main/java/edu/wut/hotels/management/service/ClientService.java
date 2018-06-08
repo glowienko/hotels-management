@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -14,6 +16,11 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientFieldsRepository fieldsRepository;
+
+
+    public Optional<Client> getClientByEmail(String email) {
+        return clientRepository.getClientByEmail(email);
+    }
 
     public Client createClient(Client newClient) {
 
