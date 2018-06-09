@@ -1,42 +1,29 @@
-import {EventEmitter, Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {RoomDto} from "../contracts/RoomDto.model";
 import {ClientDto} from "../contracts/ClientDto.model";
 import {HotelDto} from "../contracts/HotelDto.model";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ReservationService {
+  private _selectedHotel: BehaviorSubject<HotelDto> = new BehaviorSubject(new HotelDto());
+  private _selectedRoom: BehaviorSubject<RoomDto> = new BehaviorSubject(new RoomDto());
+  private _clientData: BehaviorSubject<ClientDto> = new BehaviorSubject(new ClientDto());
 
-  onRoomSelected = new EventEmitter<RoomDto>();
-  clientDataProvided = new EventEmitter<ClientDto>();
-  onHotelSelected = new EventEmitter<HotelDto>();
-  private selectedHotel: HotelDto;
-  private selectedRoom: RoomDto;
-  private clientData: ClientDto;
+  public readonly selectedHotel: Observable<HotelDto> = this._selectedHotel.asObservable();
+  public readonly selectedRoom: Observable<RoomDto> = this._selectedRoom.asObservable();
+  public readonly clientData: Observable<ClientDto> = this._clientData.asObservable();
 
   selectRoom(room: RoomDto) {
-    this.selectedRoom = room;
-    this.onRoomSelected.emit(this.selectedRoom);
+    this._selectedRoom.next(room);
   }
 
-  dataProvided(client: ClientDto) {
-    this.clientData = client;
-    this.clientDataProvided.emit(this.clientData);
+  saveClientData(client: ClientDto) {
+    this._clientData.next(client);
   }
 
   selectHotel(hotel: HotelDto) {
-    this.selectedHotel = hotel;
-    this.onHotelSelected.emit(this.selectedHotel);
-  }
-
-  getSelectedRoom() {
-    return this.selectedRoom;
-  }
-
-  getClientData() {
-    return this.clientData;
-  }
-
-  getSelectedHotel() {
-    return this.selectedHotel;
+    this._selectedHotel.next(hotel);
   }
 }

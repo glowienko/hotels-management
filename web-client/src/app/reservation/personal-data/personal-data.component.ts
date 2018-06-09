@@ -31,7 +31,7 @@ export class PersonalDataComponent implements OnInit {
     this.clientService.createOrUpdateClient(this.client).subscribe(
       savedClient => {
         this.client = savedClient;
-        this.reservationService.dataProvided(this.client);
+        this.reservationService.saveClientData(this.client);
         this.router.navigate(['/book/summary']);
       }
     );

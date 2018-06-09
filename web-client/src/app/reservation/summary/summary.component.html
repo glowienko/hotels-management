@@ -11,16 +11,15 @@
         <h6 class="w3-opacity" *ngIf="selectedRoom.prices.length > 0">
           Price: {{selectedRoom.prices[0].value}} PLN /night
         </h6>
-        <!--<p>Single bed</p>-->
-        <!--<p>15m<sup>2</sup></p>-->
+
         <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
       </div>
     </div>
     <div>
       <div class="w3-half w3-margin-bottom">
+        <p>Hotel: {{selectedHotel.name}}</p>
         <div class="w3-display-container">
           <img src="{{selectedHotel.imgPath}}" style="width:100%">
-          <span class="w3-display-bottomright w3-padding">{{selectedHotel.location}}</span>
         </div>
       </div>
     </div>
@@ -43,7 +42,7 @@
     <div class="w3-col m3" *ngIf="selectedRoom.reservations.length > 0">
       <label><i class="fa fa-calendar-o"></i> Check In</label>
       <input id="checkInDate" class="w3-input w3-border" type="text" placeholder="DD MM YYYY"
-             [(ngModel)]="selectedRoom.reservations[0].checkInDate" readonly>
+             [(ngModel)]="selectedHotel" readonly>
     </div>
     <div class="w3-col m3" *ngIf="selectedRoom.reservations.length > 0">
       <label><i class="fa fa-calendar-o"></i> Check Out</label>
