@@ -34,6 +34,6 @@ public interface RoomMapper {
     PriceDto toPriceDto(Price price);
     Price toPriceEntity(PriceDto dto);
 
-    RoomReservationDto toRootReservationDto(Reservation reservation);
+    RoomReservationDto toRoomReservationDto(Reservation reservation);
     Reservation toReservationEntity(RoomReservationDto dto);
 }

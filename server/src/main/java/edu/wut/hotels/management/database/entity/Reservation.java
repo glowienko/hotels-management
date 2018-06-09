@@ -1,5 +1,6 @@
 package edu.wut.hotels.management.database.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.AUTO;
 
 @Data
+@Builder
 @Entity(name = "reservations")
 public class Reservation implements Identifiable {
 

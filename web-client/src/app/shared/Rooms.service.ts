@@ -20,8 +20,8 @@ export class RoomsService{
 
   }
 
-  bookRoom(reservedRoom: RoomDto){
-    this.httpClient.put('app/path/book/room', reservedRoom);
-    console.log('room with id:'+ reservedRoom.id + ' was reserved');
+  bookRoom(reservationContext: any){
+    this.httpClient.put('app/path/book/room', reservationContext);
+    console.log('room with id:'+ reservationContext.room.id + ' was reserved');
   }
 }

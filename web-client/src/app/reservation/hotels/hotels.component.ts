@@ -59,6 +59,7 @@ export class HotelsComponent implements OnInit {
   }
 
   selectHotel(hotel: HotelDto) {
+    this.saveReservationInfo();
     this.showRooms = true;
 
     this.reservationService.selectHotel(hotel);
@@ -85,6 +86,17 @@ export class HotelsComponent implements OnInit {
     this.reservationService.selectRoom(room);
 
     this.router.navigate(['/book/data']);
+  }
+
+  private saveReservationInfo() {
+    let info = {
+      city: this.city,
+      hotelStars: this.stars,
+      maxPrice: this.maxPrice,
+      checkInData: this.checkInDate,
+      checkOutData: this.checkOutDate
+    };
+    this.reservationService.setReservationInfo(info);
   }
 
   setStars(stars: number) {

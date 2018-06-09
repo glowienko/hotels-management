@@ -9,5 +9,5 @@ public class ResourcePaths {
     public static final String CLIENTS_PATH = "/clients";
     public static final String ROOMS_PATH = "/rooms";
     public static final String BUILDINGS_PATH = "/buildings";
-
+    public static final String RESERVATIONS = "/reservations";
 }
