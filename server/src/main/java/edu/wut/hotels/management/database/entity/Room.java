@@ -37,7 +37,7 @@ public class Room {
     private boolean premium;
 
     @Column(name = "imgPath")
-    private boolean imgPath;
+    private String imgPath;
 
     @ManyToOne
     @JoinColumn(name = "building_id", nullable = false)

@@ -42,6 +42,7 @@ nbdist/
 gradle/wrapper
 
 application-localhost.yml
+application-mysql.yml
 out/
 bin/
 

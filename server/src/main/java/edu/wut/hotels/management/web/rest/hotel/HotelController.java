@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static edu.wut.hotels.management.web.rest.ResourcePaths.*;
@@ -52,4 +53,29 @@ public class HotelController {
         );
     }
 
+    @GetMapping(HOTELS_PATH + ROOMS_PATH)
+    public ResponseEntity<List<HotelDto>> getHotelsByUserSelection(String location, int stars, String startDate, String endDate, int price){
+
+        List<Hotel> selectedHotels = hotelService.getHotelsByUserSelection(location, stars, startDate, endDate, BigDecimal.valueOf(price));
+
+        return ResponseEntity.ok(
+                selectedHotels.stream()
+                        .map(hotelMapper::toHotelDto)
+                        .collect(toList())
+        );
+    }
+
+
+    @GetMapping(HOTELS_PATH + ID_PATH_PARAM + ROOMS_PATH)
+    public ResponseEntity<List<RoomDto>> getRoomsInHotelByUserSelection(@PathVariable(value = "id") String hotelId, String startDate, String endDate, int price){
+        int hId = Integer.parseInt(hotelId);
+
+        List<Room> selectedHotels = hotelService.getRoomsInHotelByUserSelection((long) hId, startDate, endDate, BigDecimal.valueOf(price));
+
+        return ResponseEntity.ok(
+                selectedHotels.stream()
+                        .map(roomMapper::toRoomDto)
+                        .collect(toList())
+        );
+    }
 }

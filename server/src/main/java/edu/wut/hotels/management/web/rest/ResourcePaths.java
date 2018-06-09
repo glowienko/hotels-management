@@ -10,5 +10,4 @@ public class ResourcePaths {
     public static final String ROOMS_PATH = "/rooms";
     public static final String BUILDINGS_PATH = "/buildings";
 
-
 }

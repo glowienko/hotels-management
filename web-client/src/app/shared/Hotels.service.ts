@@ -12,6 +12,12 @@ export class HotelsService{
       {observe: "body"});
   }
 
+  getHotelsByUserSelection(location: string, stars: number, startDate: Date, endDate: Date, price: number){
+    return this.httpClient.get<HotelDto[]>('http://localhost:9095/api/hotels/rooms/?location=' + location +
+      '&stars=' + stars + '&startDate=' + startDate + '&endDate=' + endDate + '&price=' + price);
+
+  }
+
   //tmp function for testing
   getSimpleAllHotels() {
     return this.httpClient.get<HotelDto[]>("http://localhost:9095/api/hotels");

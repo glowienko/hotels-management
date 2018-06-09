@@ -35,10 +35,6 @@ export class HotelsComponent implements OnInit {
               private reservationService: ReservationService) {
   }
 
-  selectRoom() {
-
-  };
-
   ngOnInit() {
     console.log('hotels are alive');
   }
@@ -47,7 +43,7 @@ export class HotelsComponent implements OnInit {
     this.showRooms = false;
     if (this.areHotelSearchDataValid()) {
       this.areSearchFieldsPresent = true;
-      this.hotelsService.getSimpleAllHotels()
+      this.hotelsService.getHotelsByUserSelection(this.city, this.stars, this.checkInDate, this.checkOutDate, this.maxPrice)
         .subscribe(
           (hotels: HotelDto[]) => {
             this.showHotels = true;
@@ -65,16 +61,15 @@ export class HotelsComponent implements OnInit {
   }
 
   selectHotel(hotel: HotelDto) {
-    this.rooms = RoomDto.getSampleDate();
     this.showRooms = true;
 
     this.reservationService.selectHotel(hotel);
-    /*
-    this.roomService.getRooms(hotel.id).subscribe(
+
+    this.roomService.getRoomsByUserSelection(hotel.id, this.checkInDate, this.checkOutDate, this.maxPrice).subscribe(
       (value: RoomDto[]) => {
         this.rooms = value;
       });
-      */
+
   }
 
   onRoomClick(room: RoomDto) {
