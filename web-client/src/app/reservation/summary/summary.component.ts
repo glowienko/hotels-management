@@ -1,70 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ReservationService} from "../reservation.service";
 import {RoomDto} from "../../contracts/RoomDto.model";
 import {ClientDto} from "../../contracts/ClientDto.model";
-import {RoomsService} from "../../shared/Rooms.service";
 import {HotelDto} from "../../contracts/HotelDto.model";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.css']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
   selectedRoom: RoomDto;
   clientData: ClientDto;
   selectedHotel: HotelDto;
-  // roomSubscription: Subscription;
-  // clientSubscription: Subscription;
-  // hotelSubscription: Subscription;
+  startDate: Date;
+  endDate: Date;
 
+  private selectedRoomSub: Subscription;
+  private clientDataSub: Subscription;
+  private selectedHotelSub: Subscription;
+  private startDateSub: Subscription;
+  private endDateSub: Subscription;
 
-  constructor(private reservationService: ReservationService,
-              private roomsService: RoomsService) {
+  constructor(private reservationService: ReservationService) {
   }
 
   ngOnInit() {
-    console.log('Summary is alive');
-    this.selectedRoom = this.reservationService.getSelectedRoom();
-    this.selectedHotel = this.reservationService.getSelectedHotel();
-    this.clientData = this.reservationService.getClientData();
+    this.selectedRoomSub = this.reservationService.selectedRoom.subscribe(room => this.selectedRoom = room);
+    this.selectedHotelSub = this.reservationService.selectedHotel.subscribe(hotel => this.selectedHotel = hotel);
+    this.clientDataSub = this.reservationService.clientData.subscribe(client => this.clientData = client);
 
-    if (this.selectedHotel == undefined) {
-      this.selectedHotel = new HotelDto();
-      this.selectedHotel.buildings = [];
-    }
+    console.log(this.selectedRoom);
+  }
 
-    if (this.selectedRoom == undefined) {
-      this.selectedRoom = new RoomDto();
-      this.selectedRoom.reservations = [];
-      this.selectedRoom.prices = [];
-    }
-
-    if (this.clientData == undefined)
-      this.clientData = new ClientDto();
-
-    this.reservationService.onRoomSelected
-      .subscribe(
-        (room: RoomDto) => {
-          this.selectedRoom = room;
-        }
-      );
-
-    this.reservationService.clientDataProvided
-      .subscribe(
-        (client: ClientDto) => {
-          this.clientData = client;
-        }
-      );
-
-    this.reservationService.onHotelSelected
-      .subscribe(
-        (hotel: HotelDto) => {
-          this.selectedHotel = hotel;
-        }
-      )
-
-
+  ngOnDestroy() {
+    this.selectedRoomSub.unsubscribe();
+    this.selectedHotelSub.unsubscribe();
+    this.clientDataSub.unsubscribe();
   }
 
 

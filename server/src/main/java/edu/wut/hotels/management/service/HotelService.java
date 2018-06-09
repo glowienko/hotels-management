@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+//    @Transactional(readOnly = true)
+//    public List<Room> findFreeRoomsByHotelId(long hotelId, Period timeRange) {
+//        return roomRepository.findByBuildingId(buildingId);
+//    }
 
 @Service
 @Transactional

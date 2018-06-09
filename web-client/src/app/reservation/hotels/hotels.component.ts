@@ -5,7 +5,6 @@ import {HotelDto} from "../../contracts/HotelDto.model";
 import {RoomDto} from "../../contracts/RoomDto.model";
 import {RoomsService} from "../../shared/Rooms.service";
 import {ReservationService} from "../reservation.service";
-import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-hotels',
@@ -19,7 +18,6 @@ export class HotelsComponent implements OnInit {
   areSearchFieldsPresent: boolean = true;
 
   hotels: HotelDto[];
-  selectedHotel: HotelDto;
   rooms: RoomDto[];
   selectedRoom: RoomDto;
 
@@ -72,7 +70,7 @@ export class HotelsComponent implements OnInit {
 
   }
 
-  onRoomClick(room: RoomDto) {
+  selectRoom(room: RoomDto) {
     this.selectedRoom = room;
     this.selectedRoom.reservations.push(
       {
@@ -89,7 +87,7 @@ export class HotelsComponent implements OnInit {
     this.router.navigate(['/book/data']);
   }
 
-  setStars(stars: number){
+  setStars(stars: number) {
     this.stars = stars;
   }
 
