@@ -10,6 +10,10 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "discounts")
+@Table(indexes = {
+        @Index(name = "start_date_idx", columnList = "start_date"),
+        @Index(name = "end_date_idx", columnList = "end_date")
+})
 public class Discount implements Identifiable {
 
     @Id

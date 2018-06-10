@@ -11,6 +11,11 @@ import static javax.persistence.GenerationType.AUTO;
 
 @Data
 @Entity(name = "prices")
+@Table(indexes = {
+        @Index(name = "start_date_idx", columnList = "start_date"),
+        @Index(name = "end_date_idx", columnList = "end_date"),
+        @Index(name = "value_idx", columnList = "value")
+})
 public class Price implements Identifiable {
     @Id
     @GeneratedValue(strategy = AUTO)
