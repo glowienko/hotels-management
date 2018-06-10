@@ -26,7 +26,7 @@ public class Hotel {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "imgPath")
+    @Column(name = "img_path")
     private String imgPath;
 
     @Column(name = "stars_count")

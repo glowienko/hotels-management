@@ -43,6 +43,9 @@ client_fields_counter = 0
 discounts_counter = 0
 prices_counter = 0
 
+hotel_img_paths = [l.rstrip('\n') for l in open('img_paths/hotels.txt').readlines()]
+room_img_paths = [l.rstrip('\n') for l in open('img_paths/rooms.txt').readlines()]
+
 
 def clear_tables(db):
     cursor = db.cursor()
@@ -82,13 +85,14 @@ def insert_random_hotel(cursor):
         'id': hotels_counter,
         'name': faker.color_name(),
         'location': faker.country(),
+        'img_path': faker.random.choice(hotel_img_paths),
         'stars_count': faker.random_number() % 5 + 1,
         'category_id': faker.random.choice(list(ids_categories.keys())),
     }
 
     cursor.execute(
-        'INSERT INTO hotels ( id ,    name   ,    location,     stars_count ,  category_id ) '
-        'VALUES             ({id}, \'{name}\', \'{location}\', {stars_count}, {category_id})'.format(**hotel)
+        'INSERT INTO hotels ( id ,    name   ,    location   ,    img_path   ,  stars_count ,  category_id ) '
+        'VALUES             ({id}, \'{name}\', \'{location}\', \'{img_path}\', {stars_count}, {category_id})'.format(**hotel)
     )
 
 
@@ -99,7 +103,7 @@ def insert_random_building(cursor):
     building = {
         'id': buildings_counter,
         'name': faker.color_name(),
-        'floors_count': faker.random_number() % 5 + 1,
+        'floors_count': faker.random_number() % 10 + 1,
         'category_id': faker.random.choice(list(ids_categories.keys())),
         'hotel_id': hotels_counter
     }
@@ -116,16 +120,17 @@ def insert_random_room(cursor):
 
     room = {
         'id': rooms_counter,
-        'floor': faker.random_number(),
-        'number': faker.random_number(),
+        'floor': faker.random_number() % 10 + 1,
+        'number': faker.random_number() % 20 + 1,
         'capacity': faker.random_number() % 5 + 1,
         'premium': faker.boolean(),
+        'img_path': faker.random.choice(room_img_paths),
         'building_id': buildings_counter
     }
 
     cursor.execute(
-        'INSERT INTO rooms ( id ,  floor ,  number ,  capacity ,  premium ,  building_id ) '
-        'VALUES            ({id}, {floor}, {number}, {capacity}, {premium}, {building_id})'.format(**room)
+        'INSERT INTO rooms ( id ,  floor ,  number ,  capacity ,  premium ,    img_path   ,  building_id ) '
+        'VALUES            ({id}, {floor}, {number}, {capacity}, {premium}, \'{img_path}\', {building_id})'.format(**room)
     )
 
 
@@ -299,3 +304,4 @@ if __name__ == '__main__':
     generate_clients(db)
     print("Generating history...")
     generate_history(db)
+    print("Done!")

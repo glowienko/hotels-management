@@ -36,7 +36,7 @@ public class Room {
     @Column(name = "premium")
     private boolean premium;
 
-    @Column(name = "imgPath")
+    @Column(name = "img_path")
     private String imgPath;
 
     @ManyToOne
