@@ -1,6 +1,8 @@
 package edu.wut.hotels.management.service;
 
+import edu.wut.hotels.management.database.entity.Discount;
 import edu.wut.hotels.management.database.entity.Hotel;
+import edu.wut.hotels.management.database.entity.Reservation;
 import edu.wut.hotels.management.database.entity.Room;
 import edu.wut.hotels.management.database.repository.HotelRepository;
 import edu.wut.hotels.management.database.repository.RoomRepository;
@@ -46,14 +48,8 @@ public class HotelService {
 
 
     @Transactional(readOnly = true)
-    public List<Hotel> getHotelsByUserSelection(String location, int stars, String startDateStr, String endDateStr, BigDecimal price) {
+    public List<Hotel> getHotelsByUserSelection(String location, int stars, LocalDateTime startDate, LocalDateTime endDate, BigDecimal price) {
         EntityManager em = emf.createEntityManager();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        startDateStr += " 00:00:00";
-        endDateStr += " 00:00:00";
-
-        LocalDateTime startDate = LocalDateTime.parse(startDateStr, format);
-        LocalDateTime endDate = LocalDateTime.parse(endDateStr, format);
 
         String queryString = "Select distinct h from hotels h join h.buildings b " +
                 "join b.rooms r " +
@@ -74,21 +70,15 @@ public class HotelService {
     }
 
     @Transactional
-    public List<Room> getRoomsInHotelByUserSelection(Long hotelId, String startDateStr, String endDateStr, BigDecimal price){
+    public List<Room> getRoomsInHotelByUserSelection(Long hotelId, LocalDateTime startDate, LocalDateTime endDate, BigDecimal price){
         EntityManager em = emf.createEntityManager();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        startDateStr += " 00:00:00";
-        endDateStr += " 00:00:00";
 
-        LocalDateTime startDate = LocalDateTime.parse(startDateStr, format);
-        LocalDateTime endDate = LocalDateTime.parse(endDateStr, format);
-
-        //todo: get discounts and check reservations
+        //todo: check reservations
         String queryString = "Select distinct r from hotels h join h.buildings b " +
                 "join b.rooms r " +
                 "join r.prices p " +
                 "where h.id = :hotelId " +
-                "and p.startDate <= :startDate and p.endDate >= :endDate and p.value <= :price";
+                "and p.startDate >= :startDate and p.endDate <= :endDate and p.value <= :price";
         Query query = em.createQuery(queryString, Room.class);
         //debug
         List result = query.setParameter("hotelId", hotelId)

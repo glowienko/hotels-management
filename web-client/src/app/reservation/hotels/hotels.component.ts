@@ -5,6 +5,7 @@ import {HotelDto} from "../../contracts/HotelDto.model";
 import {RoomDto} from "../../contracts/RoomDto.model";
 import {RoomsService} from "../../shared/Rooms.service";
 import {ReservationService} from "../reservation.service";
+import {validate} from "codelyzer/walkerFactory/walkerFn";
 
 @Component({
   selector: 'app-hotels',
@@ -16,6 +17,7 @@ export class HotelsComponent implements OnInit {
   showHotels: boolean = false;
   showRooms: boolean = false;
   areSearchFieldsPresent: boolean = true;
+  validData = true;
 
   hotels: HotelDto[];
   rooms: RoomDto[];
@@ -35,6 +37,14 @@ export class HotelsComponent implements OnInit {
 
   ngOnInit() {
     console.log('hotels are alive');
+
+    this.hotelsService.getSimpleAllHotels().
+      subscribe(
+      (hotels: HotelDto[]) => {
+        this.showHotels = true;
+        this.hotels = hotels;
+      }
+    )
   }
 
   loadHotels() {
@@ -59,16 +69,20 @@ export class HotelsComponent implements OnInit {
   }
 
   selectHotel(hotel: HotelDto) {
-    this.saveReservationInfo();
-    this.showRooms = true;
+    if(this.areHotelSearchDataValid()) {
+      this.saveReservationInfo();
+      this.showRooms = true;
 
-    this.reservationService.selectHotel(hotel);
+      this.reservationService.selectHotel(hotel);
 
-    this.roomService.getRoomsByUserSelection(hotel.id, this.checkInDate, this.checkOutDate, this.maxPrice).subscribe(
-      (value: RoomDto[]) => {
-        this.rooms = value;
-      });
-
+      this.roomService.getRoomsByUserSelection(hotel.id, this.checkInDate, this.checkOutDate, this.maxPrice).subscribe(
+        (value: RoomDto[]) => {
+          this.rooms = value;
+        });
+    }
+    else {
+      this.validData = false;
+    }
   }
 
   selectRoom(room: RoomDto) {
