@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +33,13 @@ public class ClientService {
         client.getClientFields()
                 .forEach(clientField -> clientField.setClient(client));
     }
+
+    public List<Client> findBestClientsInYear(int year, int numberOfClients) {
+        return clientRepository.findBestClientsInYear(year, numberOfClients);
+    }
+
+    public List<Client> findBestClientsSpendingMuchTimeInYear(int year, int numberOfClients, String dateFrom, String dateTo) {
+        return clientRepository.findBestClientsSpendingMuchTimeInYear(year, numberOfClients, dateFrom, dateTo);
+    }
+
 }

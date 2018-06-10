@@ -13,13 +13,12 @@ import edu.wut.hotels.management.web.rest.client.dto.ReservationContextDTO;
 import edu.wut.hotels.management.web.rest.hotel.dto.room.RoomReservationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static edu.wut.hotels.management.web.rest.ResourcePaths.API_PATH;
 import static edu.wut.hotels.management.web.rest.ResourcePaths.CLIENTS_PATH;
@@ -66,4 +65,22 @@ public class HotelClientController {
                 .status(CREATED)
                 .body(clientMapper.toClientDto(createdClient));
     }
+
+    @GetMapping("best_cost")
+    public List<ClientDto> findBestClientsInYear(@RequestParam int year, @RequestParam int numberOfClients) {
+        return clientService.findBestClientsInYear(year, numberOfClients)
+                .stream()
+                .map(clientMapper::toClientDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("best_time")
+    public List<ClientDto> findBestClientsSpendingMuchTimeInYear(@RequestParam int year, @RequestParam int numberOfClients,
+                                                                 @RequestParam String dateFrom, @RequestParam String dateTo) {
+        return clientService.findBestClientsSpendingMuchTimeInYear(year, numberOfClients, dateFrom, dateTo)
+                .stream()
+                .map(clientMapper::toClientDto)
+                .collect(Collectors.toList());
+    }
+
 }
