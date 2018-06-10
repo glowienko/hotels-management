@@ -17,14 +17,14 @@ hotels = 15
 buildings = 1
 floors = (8, 20)
 rooms = (20, 40)
-clients = 1000
-history_years = 1
+clients = 1000000
+history_years = 20
 discounts = 0.1
 discount_duration = 30
 price_duration = 30
 reservations = 0.8
 reservation_duration = 10
-batch_size = 100
+batch_size = 1000
 
 ids_categories = {
     1: 'FIRST',
@@ -206,33 +206,35 @@ def insert_random_client(cursor):
 def generate_history(db):
     cursor = db.cursor()
 
+    days = history_years * 365 + 30
+
     for i in range(1, hotels_counter + 1):
-        for j in range(int(history_years * 365 / discount_duration)):
+        for j in range(int(days / discount_duration)):
             if faker.random.random() < discounts:
                 insert_random_discount(cursor, j, i, 'hotel')
         db.commit()
     for i in range(1, buildings_counter + 1):
-        for j in range(int(history_years * 365 / discount_duration)):
+        for j in range(int(days / discount_duration)):
             if faker.random.random() < discounts:
                 insert_random_discount(cursor, j, i, 'building')
         db.commit()
     for i in range(1, rooms_counter + 1):
-        for j in range(int(history_years * 365 / discount_duration)):
+        for j in range(int(days / discount_duration)):
             if faker.random.random() < discounts:
                 insert_random_discount(cursor, j, i, 'room')
         db.commit()
 
     cursor = db.cursor()
     for i in range(1, rooms_counter + 1):
-        for j in range(int(history_years * 365 / price_duration)):
+        for j in range(int(days / price_duration)):
             insert_random_price(cursor, j, i)
         db.commit()
 
     cursor = db.cursor()
     for i in range(1, rooms_counter + 1):
-        for _ in range(int(history_years * 365 / reservation_duration)):
+        for j in range(int(days / reservation_duration)):
             if faker.random.random() < reservations:
-                insert_random_reservation(cursor, i, faker.random_int(1, clients_counter))
+                insert_random_reservation(cursor, j, i, faker.random_int(1, clients_counter))
         db.commit()
 
 
@@ -248,8 +250,8 @@ def insert_random_discount(cursor, period_id, type_id, type):
     discounts_counter += 1
 
     start_date, end_date = exact_period(period_id, discount_duration)
+    percentage = faker.random_number(2) % 50
 
-    percentage = faker.random_number(2)
     cursor.execute('INSERT INTO discounts '
                    '(id, start_date, end_date, percentage) '
                    'VALUES ({}, \'{}\', \'{}\', {})'.format(
@@ -274,8 +276,8 @@ def insert_random_price(cursor, period_id, room_id):
     prices_counter += 1
 
     start_date, end_date = exact_period(period_id, price_duration)
-
     value = '{}0.00'.format(faker.random_number(3))
+
     cursor.execute('INSERT INTO prices '
                    '(id, start_date, end_date, value) '
                    'VALUES ({}, \'{}\', \'{}\', \'{}\')'.format(
@@ -292,14 +294,20 @@ def insert_random_price(cursor, period_id, room_id):
     ))
 
 
-def insert_random_reservation(cursor, room_id, client_id):
+def insert_random_reservation(cursor, period_id, room_id, client_id):
     global reservations_counter
     reservations_counter += 1
 
-    start_date = faker.date_between(start_date='-20y', end_date='-1d')
-    end_date = faker.date_between(start_date=start_date, end_date='today')
-    cost = 0.0
-    state = faker.random.choice(list(ids_reservation_states.values()))
+    start_date, end_date = exact_period(period_id, reservation_duration)
+    cost = '{}0.00'.format(faker.random_number(3) * 10)
+
+    if start_date < end_date < datetime.today():
+        state = 'FINISHED'
+    elif start_date < datetime.today() < end_date:
+        state = 'IN_PROGRESS'
+    else:
+        state = faker.random.choice(['MADE', 'PAID'])
+
     cursor.execute('INSERT INTO reservations '
                    '(id, check_in_date, check_out_date, cost, state, client_id) '
                    'VALUES ({}, \'{}\', \'{}\', {}, \'{}\', {})'.format(
