@@ -17,10 +17,13 @@ f_out = open('results/{}.log'.format(datetime.datetime.today().strftime('%Y-%m-%
 
 def print_benchmark_results(index, filename, duration, query, query_results, file=sys.stdout):
     print('{}. {}'.format(index, filename, duration), file=file)
-    print('Duration:')
+    print(file=file)
+    print('Duration:', file=file)
     print(duration, file=file)
+    print(file=file)
     print('Query:', file=file)
     print(query, file=file)
+    print(file=file)
     print('Result:', file=file)
     print_query_results(query_results, file=file)
     print(file=file)
