@@ -5,7 +5,7 @@
     <div class="w3-panel w3-round-xlarge w3-sand w3-padding">
       <h3>10 clients who spent the most money this year</h3>
         <div>
-          <table datatable="ng" class="row-border hover" width="70%">
+          <table datatable="ng" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger1" class="row-border hover" width="70%">
             <thead>
             <tr>
               <th>First Name</th>
@@ -15,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let client of costClients | async">
+            <tr *ngFor="let client of costClientsList">
               <td>{{client.firstName}}</td>
               <td>{{client.lastName}}</td>
               <td>{{client.email}}</td>
@@ -28,7 +28,7 @@
 
     <div class="w3-panel w3-round-xlarge w3-sand w3-padding">
       <h3>10 clients who spent the most days in our hotels this year</h3>
-      <table datatable="ng" class="row-border hover" width="70%">
+      <table datatable="ng" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger2" class="row-border hover" width="70%">
         <thead>
         <tr>
           <th>First Name</th>
@@ -37,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let client of timeClients | async">
+        <tr *ngFor="let client of timeClientsList">
           <td>{{client.firstName}}</td>
           <td>{{client.lastName}}</td>
           <td>{{client.email}}</td>

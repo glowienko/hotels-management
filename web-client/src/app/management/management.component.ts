@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagementService } from './management-service';
-import {Observable} from "rxjs/Observable";
 import {ClientDto} from "../contracts/ClientDto.model";
+import {Subject} from "rxjs";
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-management',
@@ -11,14 +12,38 @@ import {ClientDto} from "../contracts/ClientDto.model";
 })
 export class ManagementComponent implements OnInit {
 
-  costClients: Observable<ClientDto[]>;
-  timeClients: Observable<ClientDto[]>;
+  costClientsList: ClientDto[];
+  timeClientsList: ClientDto[];
+  dtOptions: any = {};
+  dtTrigger1: Subject<any> = new Subject<any>();
+  dtTrigger2: Subject<any> = new Subject<any>();
 
   constructor(private atService: ManagementService) { }
 
   ngOnInit() {
-    this.costClients = this.atService.getBestCostClients();
-    this.timeClients = this.atService.getBestTimeClients();
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      responsive: true
+    };
+
+    this.atService.getBestTimeClients()
+      .subscribe(
+        (response: ClientDto[]) => {
+          this.timeClientsList = response;
+          this.dtTrigger2.next();
+        }
+      )
+
+    this.atService.getBestCostClients()
+      .subscribe(
+        (response: ClientDto[]) => {
+          this.costClientsList = response;
+          this.dtTrigger1.next();
+        }
+      )
+
   }
 
 }
