@@ -21,7 +21,8 @@ export class RoomsService{
   }
 
   bookRoom(reservationContext: any){
-    this.httpClient.put('app/path/book/room', reservationContext);
+    this.httpClient.post('http://localhost:9095/api/clients/reservations', reservationContext).subscribe(response => console.log(response));
     console.log('room with id:'+ reservationContext.room.id + ' was reserved');
+    alert('Reservation was made !')
   }
 }

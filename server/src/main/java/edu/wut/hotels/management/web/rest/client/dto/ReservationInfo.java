@@ -3,7 +3,7 @@ package edu.wut.hotels.management.web.rest.client.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class ReservationInfo {
@@ -11,7 +11,6 @@ public class ReservationInfo {
     private int hotelStars;
     private int maxPrice;
     private BigDecimal totalReservationCost;
-    private LocalDateTime checkInData;
-    private LocalDateTime checkOutData;
-
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
 }

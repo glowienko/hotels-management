@@ -16,6 +16,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
   clientData: ClientDto;
   selectedHotel: HotelDto;
   userReservationInfo: any;
+  totalPrice: number;
+  stayLenghtInNights: number;
 
   private selectedRoomSub: Subscription;
   private clientDataSub: Subscription;
@@ -29,7 +31,16 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.selectedRoomSub = this.reservationService.selectedRoom.subscribe(room => this.selectedRoom = room);
     this.selectedHotelSub = this.reservationService.selectedHotel.subscribe(hotel => this.selectedHotel = hotel);
     this.clientDataSub = this.reservationService.clientData.subscribe(client => this.clientData = client);
-    this.userReservationInfoSub = this.reservationService.userReservationInfo.subscribe(info => this.userReservationInfo = info);
+    this.userReservationInfoSub = this.reservationService.userReservationInfo.subscribe(info => {
+      this.userReservationInfo = info;
+
+      let oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+      let start = Date.parse(this.userReservationInfo.checkInDate);
+      let end = Date.parse(this.userReservationInfo.checkOutDate);
+      let stayLenght = Math.round(Math.abs((start - end)/(oneDay)));
+      this.stayLenghtInNights = stayLenght;
+      this.totalPrice = stayLenght * this.selectedRoom.prices[0].value;
+  });
 
     console.log('data from reservation service loaded');
   }
@@ -43,7 +54,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
 
   makeReservation() {
-    this.userReservationInfo.totalReservationCost = 1000; // tmp
+    this.userReservationInfo.totalReservationCost = this.totalPrice;
     let reservationContext = {
       room: this.selectedRoom,
       client: this.clientData,
@@ -52,6 +63,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     };
 
     this.roomsService.bookRoom(reservationContext);
+
   }
 
 }

@@ -26,8 +26,8 @@ export class HotelsComponent implements OnInit {
   city: string;
   stars = 5;
   maxPrice = 1000;
-  checkInDate: Date;
-  checkOutDate: Date;
+  checkInDate: Date = new Date();
+  checkOutDate: Date = new Date();
 
   constructor(private router: Router,
               private hotelsService: HotelsService,
@@ -107,8 +107,8 @@ export class HotelsComponent implements OnInit {
       city: this.city,
       hotelStars: this.stars,
       maxPrice: this.maxPrice,
-      checkInData: this.checkInDate,
-      checkOutData: this.checkOutDate
+      checkInDate: this.checkInDate,
+      checkOutDate: this.checkOutDate
     };
     this.reservationService.setReservationInfo(info);
   }

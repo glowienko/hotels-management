@@ -28,7 +28,7 @@
     <div class="w3-half w3-margin-bottom">
       <div class="w3-half w3-margin-bottom">
         <div class="w3-container w3-margin-top w3-red" id="totalPrice">
-          <h6>Total price: ....</h6>
+          <h6>Total price: {{totalPrice}} PLN for {{stayLenghtInNights}} nights</h6>
         </div>
       </div>
     </div>
@@ -42,12 +42,12 @@
     <div class="w3-col m3" *ngIf="selectedRoom.reservations.length > 0">
       <label><i class="fa fa-calendar-o"></i> Check In</label>
       <input id="checkInDate" class="w3-input w3-border" type="text" placeholder="DD MM YYYY"
-             [(ngModel)]="selectedHotel" readonly>
+             [(ngModel)]="userReservationInfo.checkInDate" readonly>
     </div>
     <div class="w3-col m3" *ngIf="selectedRoom.reservations.length > 0">
       <label><i class="fa fa-calendar-o"></i> Check Out</label>
       <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY"
-             [(ngModel)]="selectedRoom.reservations[0].checkOutDate" readonly>
+             [(ngModel)]="userReservationInfo.checkOutDate" readonly>
     </div>
   </div>
   <div class="w3-row-padding">

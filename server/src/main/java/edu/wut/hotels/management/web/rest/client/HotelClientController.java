@@ -13,9 +13,15 @@ import edu.wut.hotels.management.web.rest.client.dto.ReservationContextDTO;
 import edu.wut.hotels.management.web.rest.hotel.dto.room.RoomReservationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +29,7 @@ import java.util.stream.Collectors;
 import static edu.wut.hotels.management.web.rest.ResourcePaths.API_PATH;
 import static edu.wut.hotels.management.web.rest.ResourcePaths.CLIENTS_PATH;
 import static edu.wut.hotels.management.web.rest.ResourcePaths.RESERVATIONS;
+import static java.util.Collections.singletonList;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
@@ -45,13 +52,17 @@ public class HotelClientController {
 
     @PostMapping(RESERVATIONS)
     ResponseEntity<RoomReservationDto> makeReservation(@RequestBody ReservationContextDTO contextDTO) {
+
+        LocalDateTime checkInDate = LocalDateTime.of(contextDTO.getInfo().getCheckInDate(), LocalTime.now());
+        LocalDateTime checkOutDate = LocalDateTime.of(contextDTO.getInfo().getCheckOutDate(), LocalTime.now());
+
         Reservation reservation = Reservation.builder()
-                .checkInDate(contextDTO.getInfo().getCheckInData())
-                .checkOutDate(contextDTO.getInfo().getCheckOutData())
+                .checkInDate(checkInDate)
+                .checkOutDate(checkOutDate)
                 .state(ReservationState.MADE)
                 .client(clientMapper.toClientEntity(contextDTO.getClient()))
                 .cost(contextDTO.getInfo().getTotalReservationCost())
-                .rooms(Collections.singletonList(roomMapper.toRoomEntity(contextDTO.getRoom())))
+                .rooms(singletonList(roomMapper.toRoomEntity(contextDTO.getRoom())))
                 .build();
 
         RoomReservationDto madeReservation = roomMapper.toRoomReservationDto(reservationService.makeReservation(reservation));

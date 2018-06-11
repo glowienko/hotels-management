@@ -1,7 +1,11 @@
 package edu.wut.hotels.management.web.rest.hotel;
 
 
-import edu.wut.hotels.management.database.entity.*;
+import edu.wut.hotels.management.database.entity.Discount;
+import edu.wut.hotels.management.database.entity.Hotel;
+import edu.wut.hotels.management.database.entity.Price;
+import edu.wut.hotels.management.database.entity.Reservation;
+import edu.wut.hotels.management.database.entity.Room;
 import edu.wut.hotels.management.mapper.HotelMapper;
 import edu.wut.hotels.management.mapper.RoomMapper;
 import edu.wut.hotels.management.service.HotelService;
@@ -23,7 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static edu.wut.hotels.management.web.rest.ResourcePaths.*;
+import static edu.wut.hotels.management.web.rest.ResourcePaths.API_PATH;
+import static edu.wut.hotels.management.web.rest.ResourcePaths.BUILDINGS_PATH;
+import static edu.wut.hotels.management.web.rest.ResourcePaths.HOTELS_PATH;
+import static edu.wut.hotels.management.web.rest.ResourcePaths.ID_PATH_PARAM;
+import static edu.wut.hotels.management.web.rest.ResourcePaths.ROOMS_PATH;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -63,6 +71,7 @@ public class HotelController {
         LocalDateTime ed = dateStringToLocalDateTime(endDate);
 
         List<Hotel> selectedHotels = hotelService.getHotelsByUserSelection(location, stars, sd, ed, BigDecimal.valueOf(price));
+//        List<Hotel> selectedHotels = hotelService.getAllHotels();
 
         return ResponseEntity.ok(
                 selectedHotels.stream()
@@ -78,8 +87,10 @@ public class HotelController {
         LocalDateTime sd = dateStringToLocalDateTime(startDate);
         LocalDateTime ed = dateStringToLocalDateTime(endDate);
 
-        List<Room> selectedRooms = hotelService.getRoomsInHotelByUserSelection((long) hId, sd, ed, BigDecimal.valueOf(price));
 
+//        Optional<Hotel> hotel = hotelService.findHotelById(hId);
+//        List<Room> selectedRooms = hotelService.findRoomsByBuildingId(hotel.get().getBuildings().get(0).getId());
+        List<Room> selectedRooms = hotelService.getRoomsInHotelByUserSelection((long) hId, sd, ed, BigDecimal.valueOf(price));
         selectedRooms = checkPricesAndReservations(selectedRooms, sd, ed, price);
 
         return ResponseEntity.ok(
