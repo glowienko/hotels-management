@@ -9,6 +9,7 @@ WHERE
       JOIN rooms_reservations ON rooms.id = rooms_reservations.room_id
       JOIN reservations ON rooms_reservations.reservation_id = reservations.id
     WHERE
-      CURRENT_DATE BETWEEN reservations.check_in_date AND reservations.check_out_date
+      CURRENT_DATE BETWEEN reservations.check_in_date AND reservations.check_out_date OR
+      DATE_ADD(CURRENT_DATE, INTERVAL 10 DAY) BETWEEN reservations.check_in_date AND reservations.check_out_date
   ) AND
   hotels.id = 1;
